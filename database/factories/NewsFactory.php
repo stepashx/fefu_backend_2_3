@@ -22,10 +22,11 @@ class NewsFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->sentence,
+            'title' => $this->faker->unique->sentence,
+            'description' =>$this->faker->text,
             'text' => $this->faker->realTextBetween(250, 500),
-            'is_published' => $this->faker->boolean(),
-            'published_at' => $this->faker->dateTime(),
+            'is_published' => $this->faker->boolean(70),
+            'published_at' => $this->faker->dateTimeBetween('-2 month'),
         ];
     }
 }
