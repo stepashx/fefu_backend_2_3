@@ -9,17 +9,24 @@ class NewsController extends Controller
 {
     public function getList()
     {
-        $news = News::query()->where('is_published', '=', true)->where('published_at', '<=', now())->
-        orderByDesc('published_at')->orderByDesc('id')->paginate(5);
+        $news = News::query()->
+            where('is_published', '=', true)->
+                where('published_at', '<=', now())->
+                    orderByDesc('published_at')->
+                        orderByDesc('id')->paginate(5);
 
         return view('news_list', ['news' => $news]);
     }
 
     public function getDetails(string $slug)
     {
-        $news = News::query()->where('slug', '=', $slug)->first();
+        $news = News::query()->
+            where('slug', '=', $slug)->
+                where('is_published', '=', true)->
+                    where('published_at', '>', now())->
+                        first();
 
-        if ($news === null || $news->is_published === false || $news->published_at > now()) {
+        if ($news === null) {
             abort(404);
         }
 
