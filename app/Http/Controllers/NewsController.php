@@ -23,7 +23,7 @@ class NewsController extends Controller
         $news = News::query()->
             where('slug', '=', $slug)->
                 where('is_published', '=', true)->
-                    where('published_at', '>', now())->
+                    where('published_at', '<=', now())->
                         first();
 
         if ($news === null) {
