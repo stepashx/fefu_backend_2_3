@@ -31,13 +31,13 @@
                 </ul>
             </div>
         @endif
-        <form method="POST" action="{{ route('appeal') }}">
+        <form method="POST" action="">
             @csrf
             <div>
                 <label>Имя</label>
                 <hr>
                 <label>
-                    <input class="bordered" name="name" type="text" value="{{ request()->isMethod('post') ? old('name') : '' }}">
+                    <input class="bordered" name="name" type="text" value="{{ old('name') }}">
                 </label>
             </div>
             <hr>
@@ -45,7 +45,7 @@
                 <label>Фамилия</label>
                 <hr>
                 <label>
-                    <input class="bordered" name="surname" type="text" value="{{ request()->isMethod('post') ? old('surname') : '' }}">
+                    <input class="bordered" name="surname" type="text" value="{{ old('surname') }}">
                 </label>
             </div>
             <hr>
@@ -53,7 +53,7 @@
                 <label>Отчество(при наличии)</label>
                 <hr>
                 <label>
-                    <input class="bordered" name="patronymic" type="text" value="{{ request()->isMethod('post') ? old('patronymic') : '' }}">
+                    <input class="bordered" name="patronymic" type="text" value="{{ old('patronymic') }}">
                 </label>
             </div>
             <hr>
@@ -61,7 +61,7 @@
                 <label>Возраст</label>
                 <hr>
                 <label>
-                    <input class="bordered" name="age" type="number" value="{{ request()->isMethod('post') ? old('age') : '' }}">
+                    <input class="bordered" name="age" type="number" value="{{ old('age') }}">
                 </label>
             </div>
             <hr>
@@ -70,8 +70,8 @@
                 <hr>
                 <label>
                     <select class="bordered" name="gender">
-                        <option {{ request()->isMethod('post') && old('gender') === \App\Enums\Gender::MALE ? 'selected' : '' }} value="{{ \App\Enums\Gender::MALE }}">Мужской</option>
-                        <option {{ request()->isMethod('post') && old('gender') === \App\Enums\Gender::FEMALE ? 'selected' : '' }} value="{{ \App\Enums\Gender::FEMALE }}">Женский</option>
+                        <option {{ old('gender') === \App\Enums\Gender::MALE ? 'selected' : '' }} value="{{ \App\Enums\Gender::MALE }}">Мужской</option>
+                        <option {{ old('gender') === \App\Enums\Gender::FEMALE ? 'selected' : '' }} value="{{ \App\Enums\Gender::FEMALE }}">Женский</option>
                     </select>
                 </label>
             </div>
@@ -80,7 +80,7 @@
                 <label>Номер телефона</label>
                 <hr>
                 <label>
-                    <input class="bordered" name="phone" type="text" value="{{ request()->isMethod('post') ? old('phone') : '' }}">
+                    <input class="bordered" name="phone" type="text" value="{{ old('phone') }}">
                 </label>
             </div>
             <hr>
@@ -88,7 +88,7 @@
                 <label>Электронная почта</label>
                 <hr>
                 <label>
-                    <input class="bordered" name="email" type="text" value="{{ request()->isMethod('post') ? old('email') : '' }}">
+                    <input class="bordered" name="email" type="text" value="{{ old('email') }}">
                 </label>
             </div>
             <hr>
@@ -96,7 +96,7 @@
                 <label>Сообщение</label>
                 <hr>
                 <label>
-                    <textarea class="bordered" name="message">{{ request()->isMethod('post') ? old('message') : '' }}</textarea>
+                    <textarea class="bordered" name="message">{{ old('message') }}</textarea>
                 </label>
             </div>
             <hr>

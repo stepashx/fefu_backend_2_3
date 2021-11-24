@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AppealPostRequest;
 use App\Models\Appeal;
 use App\Sanitizers\DigitsOnlySanitizer;
+use Illuminate\Http\Request;
 
 class AppealController extends Controller
 {
@@ -14,11 +15,11 @@ class AppealController extends Controller
      * @param  \Illuminate\Http\Request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
      */
-    public function __invoke(AppealPostRequest $request)
+    public function __invoke(Request $request)
     {
         if ($request->isMethod('post'))
         {
-            $validated = $request->validated();
+            $validated = $request->validate((new AppealPostRequest())->rules());
 
             $appeal = new Appeal();
             $appeal->name = $validated['name'];
