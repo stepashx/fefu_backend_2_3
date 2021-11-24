@@ -22,10 +22,14 @@
     </head>
     <body class="antialiased">
         <h2>Отправить обращение</h2>
-        @if($success === true)
-            <hr>
-            <div style="height: 40px; width: 400px; background-color: limegreen;padding: 8px 40px">Ваше сообщение успешно отправлено</div>
-            <hr>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                    @endforeach
+                </ul>
+            </div>
         @endif
         <form method="POST" action="{{ route('appeal') }}">
             @csrf
@@ -33,52 +37,67 @@
                 <label>Имя</label>
                 <hr>
                 <label>
-                    <input class="bordered" name="name" type="text" value="{{ request()->isMethod('post') ? old('name') : '' }}" maxlength="20" size="20">
+                    <input class="bordered" name="name" type="text" value="{{ request()->isMethod('post') ? old('name') : '' }}">
                 </label>
-                @if(isset($errors['name']))
-                    <hr>
-                    <div style="height: 40px; width: 400px; background-color: orangered;padding: 8px 40px">Обязательное для ввода поле</div>
-                    <hr>
-                @endif
+            </div>
+            <hr>
+            <div>
+                <label>Фамилия</label>
+                <hr>
+                <label>
+                    <input class="bordered" name="surname" type="text" value="{{ request()->isMethod('post') ? old('surname') : '' }}">
+                </label>
+            </div>
+            <hr>
+            <div>
+                <label>Отчество(при наличии)</label>
+                <hr>
+                <label>
+                    <input class="bordered" name="patronymic" type="text" value="{{ request()->isMethod('post') ? old('patronymic') : '' }}">
+                </label>
+            </div>
+            <hr>
+            <div>
+                <label>Возраст</label>
+                <hr>
+                <label>
+                    <input class="bordered" name="age" type="number" value="{{ request()->isMethod('post') ? old('age') : '' }}">
+                </label>
+            </div>
+            <hr>
+            <div>
+                <label>Пол</label>
+                <hr>
+                <label>
+                    <select class="bordered" name="gender">
+                        <option {{ request()->isMethod('post') && old('gender') === \App\Enums\Gender::MALE ? 'selected' : '' }} value="{{ \App\Enums\Gender::MALE }}">Мужской</option>
+                        <option {{ request()->isMethod('post') && old('gender') === \App\Enums\Gender::FEMALE ? 'selected' : '' }} value="{{ \App\Enums\Gender::FEMALE }}">Женский</option>
+                    </select>
+                </label>
             </div>
             <hr>
             <div>
                 <label>Номер телефона</label>
                 <hr>
                 <label>
-                    <input class="bordered" name="phone" type="text" value="{{ request()->isMethod('post') ? old('phone') : '' }}" maxlength="11" size="11">
+                    <input class="bordered" name="phone" type="text" value="{{ request()->isMethod('post') ? old('phone') : '' }}">
                 </label>
-                @if(isset($errors['phone']))
-                    <hr>
-                    <div style="height: 40px; width: 400px; background-color: orangered;padding: 8px 40px">Введите одно из полей</div>
-                    <hr>
-                @endif
             </div>
             <hr>
             <div>
                 <label>Электронная почта</label>
                 <hr>
                 <label>
-                    <input class="bordered" name="email" type="text" value="{{ request()->isMethod('post') ? old('email') : '' }}" maxlength="100" size="100">
+                    <input class="bordered" name="email" type="text" value="{{ request()->isMethod('post') ? old('email') : '' }}">
                 </label>
-                @if(isset($errors['phone']))
-                    <hr>
-                    <div style="height: 40px; width: 400px; background-color: orangered;padding: 8px 40px">Введите одно из полей</div>
-                    <hr>
-                @endif
             </div>
             <hr>
             <div>
                 <label>Сообщение</label>
                 <hr>
                 <label>
-                    <textarea class="bordered" name="message" maxlength="100" rows="5">{{ request()->isMethod('post') ? old('message') : '' }}</textarea>
+                    <textarea class="bordered" name="message">{{ request()->isMethod('post') ? old('message') : '' }}</textarea>
                 </label>
-                @if(isset($errors['message']))
-                    <hr>
-                    <div style="height: 40px; width: 400px; background-color: orangered;padding: 8px 40px">Обязательное для ввода поле</div>
-                    <hr>
-                @endif
             </div>
             <hr>
             <input type="submit">
