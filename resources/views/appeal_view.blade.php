@@ -70,8 +70,8 @@
                 <hr>
                 <label>
                     <select class="bordered" name="gender">
-                        <option {{ old('gender') === \App\Enums\Gender::MALE ? 'selected' : '' }} value="{{ \App\Enums\Gender::MALE }}">Мужской</option>
-                        <option {{ old('gender') === \App\Enums\Gender::FEMALE ? 'selected' : '' }} value="{{ \App\Enums\Gender::FEMALE }}">Женский</option>
+                        <option {{ old('gender') === 0 ? 'selected' : '' }} value="{{ 0 }}">Мужской</option>
+                        <option {{ old('gender') === 1 ? 'selected' : '' }} value="{{ 1 }}">Женский</option>
                     </select>
                 </label>
             </div>

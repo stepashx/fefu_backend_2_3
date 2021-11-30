@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Gender;
 use App\Http\Requests\AppealPostRequest;
 use App\Models\Appeal;
 use App\Sanitizers\DigitsOnlySanitizer;
@@ -32,8 +33,10 @@ class AppealController extends Controller
             $appeal->message = $validated['message'];
             $appeal->save();
 
-            return redirect()->
-                route('appeal');
+            return redirect()
+                ->route('appeal')
+                    ->with('MALE', Gender::MALE)
+                        ->with('FEMALE', Gender::FEMALE);
         }
 
         return view('appeal_view');
