@@ -50,9 +50,9 @@ class AppealController extends Controller
 
                 $success = true;
 
-                return redirect()->
-                    route('appeal')->
-                        with('success', $success);
+                return redirect()
+                    ->route('appeal')
+                        ->with('success', $success);
             }
         }
 
