@@ -1,3 +1,7 @@
+@php
+    use App\Enums\Gender;
+@endphp
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -70,8 +74,8 @@
                 <hr>
                 <label>
                     <select class="bordered" name="gender">
-                        <option {{ old('gender') === 0 ? 'selected' : '' }} value="{{ 0 }}">Мужской</option>
-                        <option {{ old('gender') === 1 ? 'selected' : '' }} value="{{ 1 }}">Женский</option>
+                        <option {{ old('gender') === Gender::MALE ? 'selected' : '' }} value="{{ Gender::MALE }}">Мужской</option>
+                        <option {{ old('gender') === Gender::FEMALE ? 'selected' : '' }} value="{{ Gender::FEMALE }}">Женский</option>
                     </select>
                 </label>
             </div>
