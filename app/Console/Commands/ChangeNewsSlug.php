@@ -50,16 +50,29 @@ class ChangeNewsSlug extends Command
             return 1;
         }
 
+        $redirect = Redirect::query()
+            ->where('old_slug', route('news_item', ['slug' => $oldSlug], false))
+                ->where('new_slug', route('news_item', ['slug' => $newSlug], false))
+                    ->first();
+
+        if ($redirect !== null)
+        {
+            $this->error('THE SAME REQUEST OF REDIRECT');
+            return 1;
+        }
+
         $news = News::where('slug', $oldSlug)->first();
 
         if ($news === null)
         {
-            $this->error('ERROR');
+            $this->error('THE NEWS NOT FOUND');
 
             return 1;
         }
 
-        DB::transaction(function () use ($news, $oldSlug, $newSlug) {
+        DB::transaction(function () use ($news, $newSlug) {
+            Redirect::where('old_slug', route('news_item', ['slug' => $newSlug], false))
+                ->delete();
             $news->slug = $newSlug;
             $news->save();
         });

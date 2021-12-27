@@ -21,7 +21,7 @@ class RedirectFromOldSlug
         $current_url = array_key_exists('path', $url) ? $url['path'] : '';
 
         $redirect = Redirect::query()
-            ->where('old_slug', $url)
+            ->where('old_slug', $current_url)
                 ->orderByDesc('created_at')
                     ->orderByDesc('id')
                         ->first();
