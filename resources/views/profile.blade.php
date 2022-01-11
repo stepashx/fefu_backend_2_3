@@ -28,6 +28,5 @@
     <p>Login: {{ $user->login }}</p>
     <p>Name: {{ $user->name ?? '-' }}</p>
     <p>Email: {{ $user->email ?? '-' }}</p>
-    <a href="{{ route('news_list') }}" class="link">Новости</a>
 </body>
 </html>
